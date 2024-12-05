@@ -1,0 +1,18 @@
+version: "3"
+services:
+  ##############
+  # Edgebox code-server Proxy
+  ##############
+  dev-ws:
+    build:  
+      context: "./"
+    container_name: '${COMPOSE_PROJECT_NAME-edgebox}-${COMPOSE_APP_SLUG-dev}-ws'
+    restart: unless-stopped
+    environment:
+      # WS Proxy control varialbles - Do not change
+      VIRTUAL_HOST: ${LOCAL_URL}${INTERNET_URL}
+      WEB_URL: http://host.docker.internal:8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro

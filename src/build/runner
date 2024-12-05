@@ -1,0 +1,11 @@
+#!/bin/bash
+if [[ -z "$WEB_URL" ]]; then
+    echo "You must add \"-e WEB_URL=<some port>\" when running this" >&2
+    exit 1
+fi
+
+# Use | as delimiter for URLs containing /
+/bin/sed -i "s|XXX_WEB_URL_XXX|$WEB_URL|" /etc/nginx/nginx.conf
+
+echo "Proxying HTTP connections to $WEB_URL"
+nginx
