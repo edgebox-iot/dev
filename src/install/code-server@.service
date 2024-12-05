@@ -1,0 +1,13 @@
+[Unit]
+Description=code-server
+After=network.target
+
+[Service]
+Type=exec
+WorkingDirectory=/home/system/components/
+ExecStart=/usr/bin/code-server . --bind-addr 0.0.0.0:8080 --app-name 'Edgebox Dev Environment' --welcome-text 'Edgebox Dev Environment'
+Restart=always
+User=%i
+
+[Install]
+WantedBy=default.target
